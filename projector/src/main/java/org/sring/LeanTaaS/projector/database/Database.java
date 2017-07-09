@@ -21,4 +21,14 @@ public class Database {
     public static Map<Integer, Team> getTeams() {
         return teams;
     }
+    static {
+        projectors.put(1, new Projector(1));
+        projectors.put(2, new Projector(2));
+        projectors.put(3, new Projector(3));
+        teams.put(1, new Team(1));
+        teams.put(2, new Team(2));
+        teams.put(3, new Team(3));
+        teams.put(4, new Team(4));
+        teams.put(5, new Team(5));
+    }
 }

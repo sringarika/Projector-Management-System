@@ -16,14 +16,7 @@ public class ProjectorService {
     private Map<Integer, Projector> projectors = Database.getProjectors();
     private Map<Integer, Team> teams = Database.getTeams();
     public ProjectorService() {
-        projectors.put(1, new Projector(1));
-        projectors.put(2, new Projector(2));
-        projectors.put(3, new Projector(3));
-        teams.put(1, new Team(1));
-        teams.put(2, new Team(2));
-        teams.put(3, new Team(3));
-        teams.put(4, new Team(4));
-        teams.put(5, new Team(5));
+        
     }
 
     public List<Projector> getAllProjectors() {
@@ -64,9 +57,9 @@ public class ProjectorService {
         projectors.get(id).removeSlot(slot);
         return true;
     }
-    public Request checkNextAvailability() {
-        List<Request> allBookings = new ArrayList<Request>();
-        allBookings = getAllBookings();
-        Collections.sort(allBookings);
-    }
+//    public Request checkNextAvailability() {
+//        List<Request> allBookings = new ArrayList<Request>();
+//        allBookings = getAllBookings();
+//        Collections.sort(allBookings);
+//    }
 }

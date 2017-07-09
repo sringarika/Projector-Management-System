@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 public class Request {
 
     private int teamID;
@@ -14,6 +16,7 @@ public class Request {
         
     }
     public Request(int teamID, String startTime, String endTime) {
+        super();
         this.teamID = teamID;
         this.endTime = endTime;
         this.startTime = startTime;
@@ -22,9 +25,9 @@ public class Request {
      * @return the startTime
      * @throws ParseException 
      */
-    public Date getStartTime() throws ParseException {
-        DateFormat df = new SimpleDateFormat("hh:mm:ss a");
-        return df.parse(startTime);
+    public String getStartTime() throws ParseException {
+        //SimpleDateFormat df = new SimpleDateFormat("MMddyyyy hh:mm:ss");
+        return startTime;
     }
     /**
      * @param startTime the startTime to set
@@ -48,9 +51,9 @@ public class Request {
      * @return the endTime
      * @throws ParseException 
      */
-    public Date getEndTime() throws ParseException {
-        DateFormat df = new SimpleDateFormat("hh:mm:ss a");
-        return df.parse(endTime);
+    public String getEndTime() throws ParseException {
+        //SimpleDateFormat df = new SimpleDateFormat("MMddyyyy hh:mm:ss");
+        return endTime;
     }
     /**
      * @param endTime the endTime to set

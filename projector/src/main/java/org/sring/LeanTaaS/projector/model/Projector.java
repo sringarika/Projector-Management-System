@@ -2,12 +2,13 @@ package org.sring.LeanTaaS.projector.model;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import org.sring.LeanTaaS.projector.request.Request;
 
-public class Projector{
+public class Projector {
 
     private int id;
     private List<Request> requestQueue = new ArrayList<Request>();
