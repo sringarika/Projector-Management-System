@@ -28,7 +28,6 @@ public class Request implements Comparable {
      * @throws ParseException 
      */
     public String getStartTime() throws ParseException {
-        //SimpleDateFormat df = new SimpleDateFormat("MMddyyyy hh:mm:ss");
         return startTime;
     }
     /**
@@ -54,7 +53,6 @@ public class Request implements Comparable {
      * @throws ParseException 
      */
     public String getEndTime() throws ParseException {
-        //SimpleDateFormat df = new SimpleDateFormat("MMddyyyy hh:mm:ss");
         return endTime;
     }
     /**
