@@ -5,6 +5,7 @@ Using Java with Jersey
 
   Assuming bookings cannot be extended to the next day. Bookings have to end on the same day at midnight.
   The webservice allows the following API requests: 
+  
            POST: For path "http://localhost:8080/projector/request" the user can book projectors.
                    Time should be in this format-- "yyyy-MM-dd hh:mm:ss". The service suggests next slot 
                    availability to the user as well.
