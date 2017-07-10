@@ -68,6 +68,7 @@ public class ProjectorService {
         Date startTime = df.parse(slot.getStartTime());
         Date endTime = df.parse(slot.getEndTime());
         long duration = TimeUnit.MILLISECONDS.toHours(endTime.getTime() - startTime.getTime());
+        
         for(Projector proj : projectors.values()) {
             List<Request> list = proj.getRequestQueue();
             Collections.sort(list);
@@ -76,11 +77,23 @@ public class ProjectorService {
                 Date startTime2 = df.parse(list.get(i+1).getStartTime());
                 long timeDifference = TimeUnit.MILLISECONDS.toHours(startTime2.getTime() - endTime1.getTime());
                 if (timeDifference > duration) {
-                    
-                    return df.format(endTime1.getTime() + 60000);
+                    return list.get(i).getEndTime();
                 }
             }
         }
-        return projectors.get(1).getRequestQueue().get(projectors.get(1).getRequestQueue().size() - 1).getEndTime();
+        String one = projectors.get(1).getRequestQueue().get(projectors.get(1).getRequestQueue().size() - 1).getEndTime();
+        String two = projectors.get(2).getRequestQueue().get(projectors.get(2).getRequestQueue().size() - 1).getEndTime();
+        String three = projectors.get(3).getRequestQueue().get(projectors.get(3).getRequestQueue().size() - 1).getEndTime();
+        String min;
+        if (one.compareTo(two) > 0) {
+            min = two;
+        } else {
+            min = one;
+        }
+        if (min.compareTo(three) > 0) {
+            return three; 
+        } else {
+            return min;
+        }
     }
 }
