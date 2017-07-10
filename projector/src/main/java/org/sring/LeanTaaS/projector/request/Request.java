@@ -7,7 +7,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
-public class Request {
+public class Request implements Comparable {
 
     private int teamID;
     private String startTime;
@@ -60,5 +60,18 @@ public class Request {
      */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+    @Override
+    public int compareTo(Object o) {
+        // TODO Auto-generated method stub
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try {
+        Date time1 = df.parse(((Request)o).getStartTime());
+        Date time2 = df.parse(this.startTime);
+        return (int) (time2.getTime() - time1.getTime());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return 0;
     }
 }

@@ -1,11 +1,13 @@
 package org.sring.LeanTaaS.projector.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.sring.LeanTaaS.projector.database.Database;
 import org.sring.LeanTaaS.projector.model.Projector;
@@ -40,7 +42,10 @@ public class ProjectorService {
     }
     public int bookSlot(Request slot) throws ParseException {
         if (slot == null) {
-            return -1;
+            return -2;
+        }
+        if(slot.getEndTime().compareTo(slot.getStartTime()) <=0 ) {
+            return -2;
         }
         for(Projector proj: projectors.values()) {
             if(proj.checkAvailability(slot)) {
@@ -57,9 +62,25 @@ public class ProjectorService {
         projectors.get(id).removeSlot(slot);
         return true;
     }
-//    public Request checkNextAvailability() {
-//        List<Request> allBookings = new ArrayList<Request>();
-//        allBookings = getAllBookings();
-//        Collections.sort(allBookings);
-//    }
+    @SuppressWarnings("unchecked")
+    public String checkNextAvailability(Request slot) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date startTime = df.parse(slot.getStartTime());
+        Date endTime = df.parse(slot.getEndTime());
+        long duration = TimeUnit.MILLISECONDS.toHours(endTime.getTime() - startTime.getTime());
+        for(Projector proj : projectors.values()) {
+            List<Request> list = proj.getRequestQueue();
+            Collections.sort(list);
+            for(int i=0; i<list.size()-1; i++) {
+                Date endTime1 = df.parse(list.get(i).getEndTime());
+                Date startTime2 = df.parse(list.get(i+1).getStartTime());
+                long timeDifference = TimeUnit.MILLISECONDS.toHours(startTime2.getTime() - endTime1.getTime());
+                if (timeDifference > duration) {
+                    
+                    return df.format(endTime1.getTime() + 60000);
+                }
+            }
+        }
+        return projectors.get(1).getRequestQueue().get(projectors.get(1).getRequestQueue().size() - 1).getEndTime();
+    }
 }

@@ -15,6 +15,8 @@ import org.sring.LeanTaaS.projector.model.Projector;
 import org.sring.LeanTaaS.projector.request.Request;
 import org.sring.LeanTaaS.projector.service.ProjectorService;
 
+//assuming bookings cannot be extended to the next day. bookings have to end on the same day.
+
 @Path("/request")
 public class ProjectorResource {
 
@@ -24,13 +26,16 @@ public class ProjectorResource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public String bookProjector(Request slot) throws ParseException {
+        
         int result = service.bookSlot(slot);
         if (result == -1) {
-            return "Slot isnt available in any projector";
-        } else {
+            return ("This time slot isnt available in any projector. Next availability is at " + service.checkNextAvailability(slot));
+        } else if (result == -2) {
+            return "Please check your timings and book again.";
+        }
+        else {
             return ("slot booked in Projector " + result);
         }
-        //return slot;
     }
     
     @GET
@@ -38,5 +43,17 @@ public class ProjectorResource {
     public List<Request> getAllBookings() {
         return service.getAllBookings();
     }
+    
+    @Path("/{id}")
+    @DELETE
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String removeBookingSlot(Request slot, @PathParam("id") int id) {
+        boolean result = service.cancelSlot(slot, id);
+        if(result) {
+            return "Booking slot cancelled";
+        } else return "Cannot process request";
+    }
+    
     
 }
