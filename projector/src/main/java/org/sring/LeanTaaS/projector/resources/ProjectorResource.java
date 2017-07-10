@@ -52,8 +52,8 @@ public class ProjectorResource {
         boolean result = service.cancelSlot(slot, id);
         if(result) {
             return "Booking slot cancelled";
-        } else return "Cannot process request";
+        } else {
+            return "Cannot process request";
+        }
     }
-    
-    
 }

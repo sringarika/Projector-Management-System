@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.sring.LeanTaaS.projector.model.Projector;
 @XmlRootElement
 public class Request implements Comparable {
 
@@ -73,5 +75,23 @@ public class Request implements Comparable {
             System.err.println(e.getMessage());
         }
         return 0;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Request)) {
+            return false;
+        }
+        Request object = (Request) o;
+        if (this.endTime.equals(object.endTime) && this.startTime.equals(object.startTime) && this.teamID == object.teamID) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

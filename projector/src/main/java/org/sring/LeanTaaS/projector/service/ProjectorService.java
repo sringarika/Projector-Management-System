@@ -56,11 +56,7 @@ public class ProjectorService {
         return -1;
     }
     public boolean cancelSlot(Request slot, int id) {
-        if (slot == null) {
-            return false;
-        }
-        projectors.get(id).removeSlot(slot);
-        return true;
+        return projectors.get(id).removeSlot(slot);
     }
     @SuppressWarnings("unchecked")
     public String checkNextAvailability(Request slot) throws ParseException {

@@ -41,12 +41,14 @@ public class Projector {
             requestQueue.add(slot);
         }
     }
-    public void removeSlot(Request slot) {
+    public boolean removeSlot(Request slot) {
         if (slot == null) {
-            return;
-        } else {
+            return false;
+        } else if (requestQueue.contains(slot)){
             requestQueue.remove(slot);
+            return true;
         }
+        return false;
     }
     public boolean checkAvailability(Request slot) throws ParseException {
         if (slot == null) {
@@ -70,5 +72,4 @@ public class Projector {
             }
         }
     }
-    
 }
