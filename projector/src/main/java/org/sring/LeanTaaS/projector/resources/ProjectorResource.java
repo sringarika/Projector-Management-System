@@ -1,10 +1,7 @@
 package org.sring.LeanTaaS.projector.resources;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -32,13 +29,7 @@ public class ProjectorResource {
         
         int result = service.bookSlot(slot);
         if (result == -1) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date startTime = df.parse(slot.getStartTime());
-            Date endTime = df.parse(slot.getEndTime());
-            long minutes = endTime.getTime() - startTime.getTime();
-            return ("This time slot isnt available in any projector. Next availability is at " 
-                    + service.checkNextAvailability(slot) + " for " + 
-                    TimeUnit.MILLISECONDS.toMinutes(minutes - 6000) + " minutes");
+            return "This time slot isnt available in any projector. Next availability is at " + service.checkNextAvailability(slot);
         } else if (result == -2) {
             return "Please check your timings and book again.";
         }
