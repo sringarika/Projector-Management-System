@@ -34,6 +34,7 @@ import org.sring.LeanTaaS.projector.service.ProjectorService;
  *          GET: For path "http://localhost:8080/projector/request/{id}", the user can see a list of available slots.
  *                  The service suggests slots starting from the current time of the system till Midnight for the current date.
  */
+
 @Path("/request")
 public class ProjectorResource extends ApplicationExceptionMapper {
 
