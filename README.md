@@ -21,3 +21,9 @@ The web service allows the following API requests:
            GET: For path "http://localhost:8080/projector/request/{id}", the user can see a list of available slots.
                     The service suggests slots starting from the current time of the system till Midnight for the current date.
 
+An example of a valid request object- 
+{
+    "teamID" : 3,
+    "startTime": "2017-08-12 10:00:00",
+    "endTime" : "2017-08-12 11:00:00"
+}
